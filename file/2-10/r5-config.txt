@@ -1,0 +1,89 @@
+
+!
+! Last configuration change at 16:01:21 UTC Mon Oct 2 2017 by root
+version 15.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R5
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+!
+license udi pid CISCO1921/K9 sn FCZ154692XL
+!
+!
+username root privilege 15 secret 5 $1$gStV$AxCslfmoGCJuw8pRq6Zpp1
+!
+redundancy
+!
+!
+!
+!
+!
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 40.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 50.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+!
+router eigrp 20
+ network 40.0.0.0 0.0.0.3
+ network 50.0.0.0 0.0.0.3
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 GigabitEthernet0/0
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 5
+ login local
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end

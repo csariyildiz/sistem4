@@ -1,0 +1,86 @@
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname EDA
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username eda privilege 15 secret 5 $1$YkHu$VmFfYmm5xoRjiEj4RND4./
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+no aaa new-model
+ip subnet-zero
+ip cef
+!
+!
+ip dhcp excluded-address 200.0.0.1
+ip dhcp excluded-address 200.0.0.33
+!
+ip dhcp pool sistempool
+   network 200.0.0.0 255.255.255.224
+   default-router 200.0.0.1 
+   dns-server 8.8.8.8 
+!
+ip dhcp pool sistempool2
+   network 200.0.0.32 255.255.255.224
+   default-router 200.0.0.33 
+   dns-server 8.8.8.8 
+!
+no ftp-server write-enable
+!
+!
+!
+!
+interface Loopback0
+ ip address 172.0.0.2 255.255.255.255
+!
+interface FastEthernet0
+ ip address 20.0.0.1 255.255.255.252
+ speed auto
+!
+interface Serial0
+ ip address 10.0.0.2 255.255.255.252
+ clockrate 57600
+!
+interface Serial1
+ no ip address
+ shutdown
+!
+interface Serial2
+ no ip address
+ shutdown
+!
+interface Serial3
+ no ip address
+ shutdown
+!
+router ospf 100
+ log-adjacency-changes
+ area 1 virtual-link 172.0.0.3
+ network 10.0.0.0 0.0.0.3 area 0
+ network 20.0.0.0 0.0.0.3 area 1
+ network 172.0.0.2 0.0.0.0 area 1
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+no ip http server
+!
+banner motd "!!!!!Only authorized access!!!!!!!!"
+!
+line con 0
+ logging synchronous
+line aux 0
+line vty 0 4
+ login local
+line vty 5 15
+ login local
+!
+!
+end

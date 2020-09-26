@@ -1,0 +1,96 @@
+!
+! Last configuration change at 12:46:17 UTC Tue Oct 3 2017
+version 15.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+memory-size iomem 10
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+!
+license udi pid CISCO1921/K9 sn FCZ1813C183
+!
+!
+username selam privilege 15 secret 5 $1$g2H3$rwxdRPEW/0OqEOB/Buu.F.
+!
+redundancy
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 200.200.200.200 255.255.255.255
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 50.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 100.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+router ospf 100
+ network 50.0.0.0 0.0.0.3 area 2
+ network 100.0.0.0 0.0.0.3 area 2
+ network 200.200.200.200 0.0.0.0 area 2
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 2
+ login local
+ transport input all
+line vty 3 4
+ login
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end

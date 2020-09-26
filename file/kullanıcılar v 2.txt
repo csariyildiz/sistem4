@@ -1,0 +1,48 @@
+DSADD OU "OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=Satýþ,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=Mutemet,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=Üretim,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=IK,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=IT,OU=Personel,DC=bayraktar,DC=local"
+DSADD OU "OU=Depo,OU=Personel,DC=bayraktar,DC=local"
+
+DSADD USER "CN=Baris,OU=Satýþ,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no -fn Barýþ -ln Bekleviç
+DSADD USER "CN=Ahmet,OU=Satýþ,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Kadir,OU=Mutemet,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Erdem,OU=Mutemet,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Omer,OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Suheyla,OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Gokcan,OU=Üretim,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Orhan,OU=Üretim,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Semiha,OU=IK,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Hamdullah,OU=IK,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Mahmut,OU=IT,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Emre,OU=IT,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Dalyan,OU=Depo,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+DSADD USER "CN=Davut,OU=Depo,OU=Personel,DC=bayraktar,DC=local" -pwd Password1 -disabled no
+
+DSADD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Pazarlama,OU=Satýþ,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Tahsilat,OU=Mutemet,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Finans,OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Imalat,OU=Üretim,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Ozluk,OU=IK,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Cyber,OU=IT,OU=Personel,DC=bayraktar,DC=local"
+DSADD GROUP "CN=Ambar,OU=Depo,OU=Personel,DC=bayraktar,DC=local"
+
+DSQUERY USER "OU=Satýþ,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Pazarlama,OU=Satýþ,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=Mutemet,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Tahsilat,OU=Mutemet,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Finans,OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=Üretim,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Imalat,OU=Üretim,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=IK,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Ozluk,OU=IK,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=IT,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Cyber,OU=IT,OU=Personel,DC=bayraktar,DC=local" -addmbr
+DSQUERY USER "OU=Depo,OU=Personel,DC=bayraktar,DC=local" | DSMOD GROUP "CN=Ambar,OU=Depo,OU=Personel,DC=bayraktar,DC=local" -addmbr
+
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Pazarlama,OU=Satýþ,OU=Personel,DC=bayraktar,DC=local"
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Tahsilat,OU=Mutemet,OU=Personel,DC=bayraktar,DC=local"
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Finans,OU=Muhasebe,OU=Personel,DC=bayraktar,DC=local"
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Imalat,OU=Üretim,OU=Personel,DC=bayraktar,DC=local
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Ozluk,OU=IK,OU=Personel,DC=bayraktar,DC=local"
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Cyber,OU=IT,OU=Personel,DC=bayraktar,DC=local"
+DSMOD GROUP "CN=Calisanlar,OU=Personel,DC=bayraktar,DC=local" -addmbr "CN=Ambar,OU=Depo,OU=Personel,DC=bayraktar,DC=local"

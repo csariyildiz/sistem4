@@ -1,0 +1,103 @@
+
+!
+! Last configuration change at 15:05:13 UTC Mon Oct 2 2017 by sistem4
+version 15.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R4
+!
+boot-start-marker
+boot-end-marker
+!
+!
+!
+no aaa new-model
+!
+!
+!
+!
+!
+!
+!
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+!
+license udi pid CISCO1921/K9 sn FCZ1549213R
+!
+!
+username sistem4 privilege 15 secret 5 $1$rF4B$hu3bEIYZcvHi/1qLnxYT/0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ ip address 172.168.10.1 255.255.255.255
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 30.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 40.0.0.2 255.255.255.252
+ duplex auto
+ speed auto
+!
+!
+router eigrp 20
+ network 40.0.0.0 0.0.0.3
+ redistribute ospf 10 metric 10000 10 255 255 1500
+!
+router ospf 10
+ redistribute eigrp 20 subnets
+ network 30.0.0.0 0.0.0.3 area 1
+ network 172.168.10.1 0.0.0.0 area 1
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ password 12345
+ logging synchronous
+ login
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 4
+ login local
+ transport input all
+line vty 5 15
+ login local
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end

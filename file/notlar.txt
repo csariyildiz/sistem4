@@ -1,0 +1,32 @@
+switch
+------------------
+
+show vlan
+
+vlan 20
+	name satis
+
+int fa0/2
+	swi acc vl 20
+int ran fa0/3-15
+	swi acc vl 20
+
+do sh vlan 
+
+int fa0/1
+	mo tr
+
+
+router
+-----------------
+
+int fa0/0
+	no sh
+	no ip add
+int fa0/0.20
+	enc dot 20
+	ip add 192.168.100.30 255.255.255.224
+
+
+
+

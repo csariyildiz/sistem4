@@ -1,0 +1,124 @@
+
+!
+version 12.2
+no service pad
+service timestamps debug uptime
+service timestamps log uptime
+no service password-encryption
+!
+hostname L3-Sw
+!
+!
+username sistem4 privilege 15 secret 5 $1$Zf1T$kFt1CR396UqpLn3Vy///o/
+no aaa new-model
+switch 2 provision ws-c3750-24p
+system mtu routing 1500
+ip subnet-zero
+ip routing
+!
+!
+!
+!
+!
+!
+no file verify auto
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+interface FastEthernet2/0/1
+ no switchport
+ ip address 50.0.0.2 255.255.255.252
+!
+interface FastEthernet2/0/2
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet2/0/3
+ switchport trunk encapsulation dot1q
+ switchport mode trunk
+!
+interface FastEthernet2/0/4
+!
+interface FastEthernet2/0/5
+!
+interface FastEthernet2/0/6
+!
+interface FastEthernet2/0/7
+!
+interface FastEthernet2/0/8
+!
+interface FastEthernet2/0/9
+!
+interface FastEthernet2/0/10
+!
+interface FastEthernet2/0/11
+!
+interface FastEthernet2/0/12
+!
+interface FastEthernet2/0/13
+!
+interface FastEthernet2/0/14
+!
+interface FastEthernet2/0/15
+!
+interface FastEthernet2/0/16
+!
+interface FastEthernet2/0/17
+!
+interface FastEthernet2/0/18
+!
+interface FastEthernet2/0/19
+!
+interface FastEthernet2/0/20
+!
+interface FastEthernet2/0/21
+!
+interface FastEthernet2/0/22
+!
+interface FastEthernet2/0/23
+!
+interface FastEthernet2/0/24
+!
+interface GigabitEthernet2/0/1
+!
+interface GigabitEthernet2/0/2
+!
+interface Vlan1
+ no ip address
+!
+interface Vlan20
+ ip address 192.168.50.1 255.255.255.224
+ ip helper-address 30.0.0.1
+!
+interface Vlan30
+ ip address 192.168.50.33 255.255.255.224
+ ip helper-address 30.0.0.1
+!
+router eigrp 20
+ network 50.0.0.0 0.0.0.3
+ network 192.168.50.0 0.0.0.31
+ network 192.168.50.32 0.0.0.31
+ no auto-summary
+!
+ip classless
+ip route 0.0.0.0 0.0.0.0 192.168.52.120
+ip http server
+ip http secure-server
+!
+!
+!
+control-plane
+!
+!
+line con 0
+line vty 0 4
+ login local
+line vty 5
+ login local
+line vty 6 15
+ login
+!
+end

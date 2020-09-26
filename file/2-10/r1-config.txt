@@ -1,0 +1,75 @@
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R1
+!
+boot-start-marker
+boot-end-marker
+!
+enable secret 5 $1$UlE7$bNqx0Vk3RdZXF65WxSWWw1
+!
+username root privilege 15 secret 5 $1$jrMj$rwtteET/dtQlUAi02q.5l/
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+no aaa new-model
+ip subnet-zero
+ip cef
+!
+!
+!
+no ftp-server write-enable
+!
+!
+!
+!
+interface FastEthernet0
+ ip address dhcp
+ ip nat outside
+ speed auto
+!
+interface Serial0
+ ip address 10.0.0.1 255.255.255.252
+ ip nat inside
+!
+interface Serial1
+ no ip address
+ shutdown
+!
+interface Serial2
+ no ip address
+ shutdown
+!
+interface Serial3
+ no ip address
+ shutdown
+!
+router ospf 10
+ log-adjacency-changes
+ network 10.0.0.0 0.0.0.3 area 0
+ network 192.168.52.0 0.0.1.255 area 0
+!
+ip nat pool sistem4 192.168.52.120 192.168.52.120 netmask 255.255.254.0
+ip nat inside source list 1 pool sistem4 overload
+ip nat inside source static tcp 10.0.0.1 23 192.168.52.120 23 extendable
+ip nat inside source static tcp 10.0.0.2 23 192.168.52.120 2023 extendable
+ip nat inside source static tcp 20.0.0.1 23 192.168.52.120 2024 extendable
+ip nat inside source static tcp 172.168.10.1 23 192.168.52.120 2025 extendable
+ip nat inside source static tcp 40.0.0.1 23 192.168.52.120 2026 extendable
+ip nat inside source static tcp 50.0.0.2 23 192.168.52.120 2027 extendable
+ip classless
+no ip http server
+!
+access-list 1 permit any
+!
+line con 0
+line aux 0
+line vty 0 5
+ login local
+!
+!
+end

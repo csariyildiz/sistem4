@@ -1,0 +1,106 @@
+
+!
+! Last configuration change at 15:02:38 UTC Mon Oct 2 2017
+version 15.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname OrtaMasa
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable secret 5 $1$QgHy$l92wj8nfke4CbkLRA5ySM0
+!
+no aaa new-model
+memory-size iomem 10
+!
+!
+!
+!
+ip dhcp excluded-address 192.168.50.1
+ip dhcp excluded-address 192.168.50.33
+!
+ip dhcp pool vlan_20
+ network 192.168.50.0 255.255.255.224
+ default-router 30.0.0.1 
+ dns-server 195.175.39.50 
+!
+ip dhcp pool vlan_30
+ network 192.168.50.32 255.255.255.224
+ dns-server 195.175.39.50 
+ default-router 30.0.0.1 
+!
+!
+!
+ip cef
+no ipv6 cef
+multilink bundle-name authenticated
+!
+!
+!
+license udi pid CISCO1921/K9 sn FCZ1813C183
+!
+!
+username root privilege 15 secret 5 $1$Qx1t$9S9mVWodveH8j8TtJqVYm0
+!
+redundancy
+!
+!
+!
+!
+!
+!
+interface Loopback0
+ no ip address
+!
+interface Embedded-Service-Engine0/0
+ no ip address
+ shutdown
+!
+interface GigabitEthernet0/0
+ ip address 20.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+interface GigabitEthernet0/1
+ ip address 30.0.0.1 255.255.255.252
+ duplex auto
+ speed auto
+!
+router ospf 10
+ network 20.0.0.0 0.0.0.3 area 1
+ network 30.0.0.0 0.0.0.3 area 1
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+!
+!
+!
+!
+control-plane
+!
+!
+!
+line con 0
+ logging synchronous
+line aux 0
+line 2
+ no activation-character
+ no exec
+ transport preferred none
+ transport output pad telnet rlogin lapb-ta mop udptn v120 ssh
+ stopbits 1
+line vty 0 5
+ login local
+ transport input all
+!
+scheduler allocate 20000 1000
+!
+end

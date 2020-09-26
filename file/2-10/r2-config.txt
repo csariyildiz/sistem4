@@ -1,0 +1,67 @@
+
+!
+version 12.3
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+!
+hostname R2
+!
+boot-start-marker
+boot-end-marker
+!
+!
+username root privilege 15 secret 5 $1$KhjP$ZZDtIG.Z7pBP5QEbio5o20
+mmi polling-interval 60
+no mmi auto-configure
+no mmi pvc
+mmi snmp-timeout 180
+no aaa new-model
+ip subnet-zero
+ip cef
+!
+!
+!
+no ftp-server write-enable
+!
+!
+!
+!
+interface FastEthernet0
+ ip address 20.0.0.2 255.255.255.252
+ speed auto
+!
+interface Serial0
+ ip address 10.0.0.2 255.255.255.252
+ clockrate 8000000
+!
+interface Serial1
+ no ip address
+ shutdown
+!
+interface Serial2
+ no ip address
+ shutdown
+!
+interface Serial3
+ no ip address
+ shutdown
+!
+router ospf 10
+ log-adjacency-changes
+ network 10.0.0.0 0.0.0.3 area 0
+ network 20.0.0.0 0.0.0.3 area 1
+!
+ip default-gateway 10.0.0.1
+ip classless
+ip route 0.0.0.0 0.0.0.0 Serial0
+no ip http server
+!
+!
+line con 0
+line aux 0
+line vty 0 5
+ login local
+!
+!
+end
