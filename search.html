@@ -1,0 +1,49 @@
+---
+layout: default
+title: Ara
+permalink: /search/
+sitemap: false 
+---
+
+<div>
+ 
+
+<style>
+
+.main-content table {
+    display: table;
+}
+
+.main-content table th, .main-content table td,  .main-content table tr {
+    padding: 0px;
+    padding-left:8px;
+    border: none;
+}
+
+.gsc-selected-option{
+    width: fit-content;
+}
+
+
+.gsc-control-cse, .gsc-control-cse-tr{
+padding-top:0px;
+}
+</style>
+ 
+ 
+ <div id="home-search" class="home">
+     <script>
+         (function() {
+          var cx = '007728397758235947613:9fi6fqaqtzk';   
+          var gcse = document.createElement('script');
+             gcse.type = 'text/javascript';
+             gcse.async = true;
+             gcse.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') +
+             '//www.google.com/cse/cse.js?cx=' + cx;
+             var s = document.getElementsByTagName('script')[0];
+             s.parentNode.insertBefore(gcse, s);
+         })();
+     </script>
+     <gcse:searchresults-only></gcse:searchresults-only>
+ </div>
+</div>

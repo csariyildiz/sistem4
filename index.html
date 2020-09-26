@@ -1,0 +1,69 @@
+---
+layout: main
+title: Network ve Sistem Mühendisliği Notları
+---
+
+<div id="home">
+  
+  <div>
+    <div id="mainbar" style="float: left; width: 70%; padding-right: 20px;">
+      
+    <table>
+  <tr>
+    <th>Gün</th>
+    <th>Tarih</th>
+    <th>Etiketler</th>
+  </tr>
+    
+     {% for post in site.categories.main %}
+    <tr>
+      <td  style=" min-width: 107px; ">{{ post.title }}</td> 
+      <td style=" min-width: 125px; "><a href="{{ site.baseurl }}{{ post.url }}">{{ post.date | date: "%Y-%m-%d" }}</a></td>
+      <td>{% for tag in post.tags %}<a href="etiket#{{ tag }}" class="ssTag">{{ tag }}</a>{% endfor %}</td>
+    </tr>
+    {% endfor %}
+    
+</table>
+
+    </div>
+    
+    
+<input type="text" id="ara" style="max-width: 60%; float: left; margin-right: -1px;">
+<button id="btnara" type="button" onclick="window.open('https://sistem4.tk/search/?q='+(document.getElementsByTagName('input')[0].value))"  style="max-width: 30%; float: left; height: 30px;">Ara</button><br>
+
+ <h3>Genel Bakış</h3>
+[01-17]	Network<br/>
+[17-29]	Sistem<br/>
+[30-43]	Sistem<br/>
+[44-47]	Network Lab<br/>
+[47-57] Exchange Server<br/>
+[57-71] Windows Server<br/>
+[72-##] Network<br/>
+[##-##] Kariyer<br/> 
+[##-##] Linux<br/>
+[##-##] Bulut<br/>
+
+<h3>Notlar</h3>
+<a href="/second/2017/10/27/fsmo-rolleri.html">FSMO Rolleri</a><br/>
+<a href="/second/2017/10/31/exchange.html">Exchange Server</a><br/>
+<a href="/second/2017/11/02/failover-clustering.html">Failover Clustering</a><br/>
+
+   
+   
+   
+    </div>
+  </div>
+ 
+    
+
+</div>
+
+<script>
+  document.getElementById("ara")
+    .addEventListener("keyup", function(event) {
+    event.preventDefault();
+    if (event.keyCode === 13) {
+        document.getElementById("btnara").click();
+    }
+});
+</script>
