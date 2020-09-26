@@ -1,0 +1,11 @@
+---
+layout: default
+title : {{ page.title }}
+---
+<div>
+<p class="meta" style="float: right;">{% for tag in page.tags %}<a href="#" style="color: #606c71; font-size: 13px; padding-left: 5px;">{{ tag }}</a>{% endfor %} | {{ page.date | date_to_string }}</p>
+<h1 style=" margin-top: 0px; border-bottom: solid 1px #eff0f1; padding-bottom: 0.5rem;">{{ page.title }}</h1>
+</div>
+
+{{ content }}
+{% include disqus.html %}
